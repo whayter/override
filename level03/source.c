@@ -50,8 +50,9 @@ void decrypt(int n)
 void test(int input, int salt)
 {
     salt -= input;                                              // test+6 - test+18
-    if (salt > 0 && salt < 22 && (salt < 10 || salt > 15))      // test+21 - test+25
-        decrypt(salt);                                          // test+
+
+    if ((salt > 0 && salt < 10) || (salt > 15 && salt < 22))    // test+21 - test+257
+        decrypt(salt);
     else
         decrypt(rand());                                        // test+259 - test+267
     return ;                                                    // test+273 - test+274
