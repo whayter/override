@@ -10,6 +10,11 @@ Back in the world of ELF 32-bit LSB executables. At runtime, the name of the pro
 We deduce from some elements of the decrypt() function the use of the `-fstack-protector` flag at compile time, which protects against buffer overflow. How does it work ? The prologue of a function stores a guard variable onto the stack frame. Before returning from the function, the function epilogue checks the guard variable to make sure that it has not been overwritten. A guard variable that is overwritten indicates a buffer overflow, and the checking code alerts the run-time environment. This guard is called a [stack canaries](https://en.wikipedia.org/wiki/Buffer_overflow_protection#Canaries).
 :::
 
+
+::: tip Titre
+Texte
+:::
+
 We have a way to approximate the correct password: from the test() function, we know that `salt - input` must be greater than 0 and less than 10, or greater than 15 and less than 22, which leaves us with 15 possible values. What a lousy security system!
 
 Here are the ranges for the possible values of the password: `322424823 < input < 322424830` or `322424835 < input < 322424845`. We could write a small script to find the right value in these intervals, but honestly, we will go faster by testing the different possibilities by hand. The correct password is 322424827.
