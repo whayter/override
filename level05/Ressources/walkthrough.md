@@ -1,10 +1,10 @@
 The program is quite simple. It records the user's input in a buffer with a call to fgets(). Then it makes a kind of tolower() for each uppercase alphabetic character in the buffer. Finally, the content of the buffer is displayed with a badly formatted printf() before the program exits using `exit(0)`.
 
 We will be able to perform a format string attack thanks to the badly formatted printf(). We will have to use a shellcode, and for its execution, we should be able to overwrite the address of exit() in the Global Offset Table (GOT). Here is our roadmap:
-1. export a shellcode in an environment variable and find its address in memory.
-2. find the exit() address in the Global Offset Table.
-3. find the offset of the buffer.
-4. build our payload.
+* export a shellcode in an environment variable and find its address in memory.
+* find the exit() address in the Global Offset Table.
+* find the offset of the buffer.
+* build our payload.
 
 1. First, let's export a shellcode in an environment variable and find its address using [this little script](env_addr.c):
 ```
