@@ -31,7 +31,9 @@ Here we have the begining of the buffer (61616161 = "aaaa") with an offset of 10
 
 But what do we want to write? The address of our shellcode of course. The difficulty here is that the `%n` modifier has a particular behaviour: it writes the number of characters that come before the occurrence of the modifier. We will have to write the number of characters corresponding to the decimal value of the address of our shellcode (0xffffd88a = 4294957194). Obviously, so many characters will never fit in the buffer, so we will use a modifier with a width field.
 
-Here we encounter another difficulty: the decimal value of the shellcode address is too large to be stored on 32 bits. We will therefore split the address and write it on 8 bytes. Since we want to register the address in the little endian convention, we have to first give the two last bytes of the address. For each part, we need to get the decimal value and substract from it the number of characters that have already been printed:
+Here we encounter another difficulty: the decimal value of the shellcode address is too large to be stored on 32 bits. We will therefore split the address and write it on 8 bytes. Since we want to register the address in the little endian convention, we have to first give the two last bytes of the address. Since in 32-bit architecture the stack must be aligned to addresses that are multiples of 4, we will write to addresses 0x080497e0 and 0x080497e2.
+
+For each part, we need to get the decimal value and substract from it the number of characters that have already been printed:
 * 0xd88a = 55434, 55434 - 8 = 55426
 * 0xffff = 65535, 65535 - 55434 = 10101
 
