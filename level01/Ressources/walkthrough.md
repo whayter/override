@@ -1,6 +1,6 @@
 The program displays a prompt before asking the user for its username. The input is then checked and well, bad luck, my input is not valid. So let's look at the assembly code.
 
-There are three functions: main(), verify_user_name() and verify_user_pass(). Please check the [source code](source.c) for more details. If we look closely, we can see that the credentials appear in hard copy in the code. Thus the expected username is "dat_wil" and the password is "admin". But we can also see that the code is broken: when filling in the proper password, the program still displays an error message. Anyway, this is not the way to pass this level.
+There are three functions: main(), verify_user_name() and verify_user_pass(). Please check the [source code](../source.c) for more details. If we look closely, we can see that the credentials appear in hard copy in the code. Thus the expected username is "dat_wil" and the password is "admin". But we can also see that the code is broken: when filling in the proper password, the program still displays an error message. Anyway, this is not the way to pass this level.
 
 Looking at the reconstructed source code, we see that the second fgets() writes up to 100 bytes in a local variable that can only hold 64 bytes. We can therefore carry out a buffer overflow attack and overwrite the address pointed to by EIP.
 

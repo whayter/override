@@ -1,6 +1,6 @@
 This time, the executable file is in ELF 64-bit format. Once launched, the program displays a prompt and asks the user to identify himself (username, then password). The program then displays (unless the credentials are good of course) a message in the format username + "does not have access!
 
-By reconstructing the [source code](source.c) with the help of gdb, we understand better how the program works and how we can exploit it. Three variables declared on the stack are relevant to us. The first one is intended to store the username of the user (at -0x70(%rbp)). The second one stores the content of the file `/home/users/level03/.pass` (at -0xa0(%rbp)). The third one stores the password given by the user (at -0x110(%rbp)).
+By reconstructing the [source code](../source.c) with the help of gdb, we understand better how the program works and how we can exploit it. Three variables declared on the stack are relevant to us. The first one is intended to store the username of the user (at -0x70(%rbp)). The second one stores the content of the file `/home/users/level03/.pass` (at -0xa0(%rbp)). The third one stores the password given by the user (at -0x110(%rbp)).
 
 If the password entered by the user is equal to the content of the .pass file, then a shell is launched. But then we wouldn't need to launch a shell anymore since we already know the password/flag.
 

@@ -6,7 +6,7 @@ cat: /home/users/level01/.pass: Permission denied
 ```
 Of course, that whould be too easy.
 
-Using gdb, we can reconstruct the [source code](source.c) of the executable file we have. The program displays a prompt and then asks the user to enter a password. The password appears in clear text in the code: 5276. When we enter it, the program confirms the authentication and launches a shell. We can then retrieve the contents of the .pass file:
+Using gdb, we can reconstruct the [source code](../source.c) of the executable file we have. The program displays a prompt and then asks the user to enter a password. The password appears in clear text in the code: 5276. When we enter it, the program confirms the authentication and launches a shell. We can then retrieve the contents of the .pass file:
 
 ```
 level00@OverRide:~$ ./level00 

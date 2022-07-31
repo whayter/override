@@ -1,4 +1,4 @@
-Back in the world of ELF 32-bit LSB executables. At runtime, the name of the program is displayed and you are asked to enter a password, after which there is a very good chance that the program will display "Invalid password" and exit. Reconstructing the [source code](source.c), we find a number of functions, three of which are actually called  during program execution: the main() function, a test() function and a decrypt() function:
+Back in the world of ELF 32-bit LSB executables. At runtime, the name of the program is displayed and you are asked to enter a password, after which there is a very good chance that the program will display "Invalid password" and exit. Reconstructing the [source code](../source.c), we find a number of functions, three of which are actually called  during program execution: the main() function, a test() function and a decrypt() function:
 
 * The main() function displays a few lines and then saves the user's input in an int variable using scanf() before calling the test() function, passing it two parameters: the value saved with scanf(), and 0x1337d00d (= 322424845).
 
