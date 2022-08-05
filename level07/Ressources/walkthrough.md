@@ -1,11 +1,11 @@
-The program is a number storage service. We can store numbers, read the stored numbers, or quit. Looking at the [source code](../source.c) in more detail, we notice that there is no check of the index where we save our numbers in the store_number() function. Therefore, we can write almost anywhere we want on the stack. We'll be able to exploit that, but we'll have to deal with some protections: 
+The program is a number storage service. We can store numbers, read the stored numbers, or quit. Looking at the [source code](../source.c) in more detail, we notice that there is no check of the index where we save our numbers in the store_number() function. Therefore, we can write almost anywhere we want on the stack. We'll be able to exploit that, but we'll have to deal with some limitations: 
 
 * First of all, concerning the registration of numbers in the dataset:
-- numbers are stored at index * 4
-- index % 3 must not be equal to 0
-- number >> 24 must not be equal to 183 
+** numbers are stored at index * 4
+** index % 3 must not be equal to 0
+** number >> 24 must not be equal to 183 
 
-* The program has been compiled with the flag "-fstack-protector" which protects the return address of the program functions.
+* The program has been compiled with the flag "-fstack-protector" which protects the return address of the program's main() function.
 
 * At the beginning of the program, `av` and `env` are cleared and therefore cannot be used to store shellcode in memory. 
 
