@@ -80,7 +80,6 @@ int main(int ac, char** av, char** env)
 
 	args = av;															// main+15 - main+18
 	e = env;															// main+22 - main+25
-	command = NULL;														// main+55
 	for (int i = 0; i < 100; i++)										// main+110 - main+128
 		numbers[i] = 0;
 	for (int i = 0; args[i]; i++)										// main+130 - main+207
@@ -97,7 +96,7 @@ int main(int ac, char** av, char** env)
 			"----------------------------------------------------\n"
 			"   wil has reserved some storage :>                 \n"
 			"----------------------------------------------------\n");	// main+ 288 - main+295
-	while (true)														// main+679
+	while (1)														// main+679
 	{
 		printf("Input command: ");										// main+300 - main+308
 		ret = 1;														// main+313
@@ -112,7 +111,6 @@ int main(int ac, char** av, char** env)
 			printf(" Failed to do %s command\n", command);				// main+588 - main+607
 		else
 			printf(" Completed %s command successfully\n", command);	// main+614 - main+633
-		command = NULL;													// main+638 - main+645
 	}
     return(0);															// main+684 - main+718
 }
