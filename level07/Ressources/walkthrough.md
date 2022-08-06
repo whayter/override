@@ -18,9 +18,9 @@ We could store a shellcode on the stack using the store_number() function, but i
 
 # Exploit
 
-First of all, let's find the address of the buffer. We know it is located at 0x24(%esp) in the main() function. Using gdb, we get the address of ESP (0xffffd520) and then calculate the effective address of the buffer: 0xffffd544.
+1. First of all, let's find the address of the buffer. We know it is located at 0x24(%esp) in the main() function. Using gdb, we get the address of ESP (0xffffd520) and then calculate the effective address of the buffer: 0xffffd544.
 
-We must then find the address of EIP in order to calculate its offset from the buffer. To do so, we just need to set a breakpoint anywhere in the main() function using gdb, and enter the command `ìnfo frame`:
+2. We must then find the address of EIP in order to calculate its offset from the buffer. To do so, we just need to set a breakpoint anywhere in the main() function using gdb, and enter the command `ìnfo frame`:
 ```
 (gdb) info frame
 Stack level 0, frame at 0xffffd710:
@@ -37,12 +37,12 @@ $1 = 456
 ```
 Since we record unsigned int, we have to divide this value by 4 to find the right index. So we want to write from index 114.
 
+3. Petit problème
 
 
 
 
-
-Finally, we can find the memory addresses of the system() and exit() functions, as well as the string "/bin/sh", as we did in level04:
+4. Finally, we can find the memory addresses of the system() and exit() functions, as well as the string "/bin/sh", as we did in level04:
 ```
 (gdb) p system
 $1 = {<text variable, no debug info>} 0xf7e6aed0 <system>
