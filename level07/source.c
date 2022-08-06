@@ -55,7 +55,7 @@ int store_number(unsigned int* numbers)
 		return(1);														// store_number+139 & store_number+165 - store_number+166
 	}
 	if (number >> 24 != 183)											// store_number+90 - store_number+101
-		numbers[index * 4] = number;									// store_number+146 - store_number+158
+		numbers[index] = number;										// store_number+146 - store_number+158
 	return(0);															// store_number+160 - store_number+166
 }
 
@@ -66,7 +66,7 @@ int read_number(unsigned int* numbers)
 	index = 0;															// read_number+6
 	printf(" Index: ");													// read_number+13 - read_number+21
 	index = get_unum();													// read_number+26 - read_number+31
-	printf(" Number at data[%u] is %u\n", index, numbers[index << 2]);	// read_number+34 - read_number+64
+	printf(" Number at data[%u] is %u\n", index, numbers[index]);		// read_number+34 - read_number+64
 	return(0);															// read_number+69 - read_number+75
 }
 
