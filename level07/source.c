@@ -1,11 +1,6 @@
-#include <sys/types.h>
-#include <sys/ptrace.h>
-#include <sys/wait.h>
-#include <signal.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 void clear_stdin()
 {
