@@ -33,10 +33,8 @@ Stack level 0, frame at 0xffffd710:
 $1 = 456
 ```
 
-3. Petit problème
-
-
-
+3. Here's a little issue: 114 is divisible by 3, so the program will prevent us from writing there. But fortunately for us, when an unsigned int overflows (values over 4294967295), it "wraps around". So UINT_MAX + 1 = 0, UINT_MAX + 2 = 1...
+`(4294967295 + 1 + 456) / 4 = 1073741938` is not divisible by three, but will write exactly where we want to.
 
 4. Finally, we can find the memory addresses of the system() and exit() functions, as well as the string "/bin/sh", as we did in level04:
 ```
@@ -48,10 +46,7 @@ $2 = {<text variable, no debug info>} 0xf7e5eb70 <exit>
 0xf7f897ec
 ```
 
-
-
-
-
+5. We can now record the decimal value of the system() address at index 1073741938, then the one for exit() at index 115 and finally the one for "/bin/sh" at index 116. Once this is done, a shell will be launched when we try to exit the program:
 ```
 level07@OverRide:~$ ./level07 
 ----------------------------------------------------
