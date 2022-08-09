@@ -35,10 +35,10 @@ int main(int ac, char** av)
 		exit(1);														// main+151 - main+156
 	}
 	log_wrapper(logs, "Starting back up: ", av[1]);						// main+161 - main+190
-	file = fopen(av[2], "r");											// main+195 - main+225
+	file = fopen(av[1], "r");											// main+195 - main+225
 	if (file == NULL)													// main+229 - main+234
 	{
-		printf("ERROR: Failed to open %s\n", av[2]);					// main+229 - main+266
+		printf("ERROR: Failed to open %s\n", av[1]);					// main+229 - main+266
 		exit(1);														// main+271 - main+276
 	}
 	strcpy(buf, "./backups/");											// main+281 - main+329
@@ -49,7 +49,7 @@ int main(int ac, char** av)
 		printf("ERROR: Failed to open ./backups/%s\n", av[1]);			// main+438 - main+470
 		exit(1);														// main+475 - main+480
 	}
-	while (1)														// main+529 - main+531
+	while (1)															// main+529 - main+531
 	{
 		if ((c = fgetc(file)) == -1)									// main+509 - main+529
 			break ;														// main+531
